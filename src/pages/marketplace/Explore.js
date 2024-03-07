@@ -31,9 +31,9 @@ const Explore = () => {
 
   const currentUser = moralis.User.current()
 
-  // if (!currentUser) {
-  //   return <Redirect to='/auth'/>
-  // }
+  if (!currentUser) {
+    return <Redirect to='/auth' />
+  }
 
   return (
     <div>

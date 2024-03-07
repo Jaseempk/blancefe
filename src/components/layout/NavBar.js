@@ -57,7 +57,7 @@ const Navbar = () => {
           </Form>
 
           <Nav.Link href="/explore">Explore</Nav.Link>
-          {currentUser ? loggedOutItems : loggedInItems}
+          {currentUser ? loggedInItems : loggedOutItems}
         </Nav>
       </div>
     </BsNavbar>

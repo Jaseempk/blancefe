@@ -2,6 +2,8 @@ import { useState } from "react"
 import { Alert, Button, CloseButton, Form } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 import moralis from 'moralis'
+import { app } from "./firebaseConfig";
+import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignUp = () => {
   const history = useHistory()
@@ -9,7 +11,27 @@ const SignUp = () => {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [errorMsg, setErrorMsg] = useState('') 
+  const [errorMsg, setErrorMsg] = useState('')
+
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+
+  const onnSubmit = () => {
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed up 
+        const user = userCredential.user;
+        console.log("userCredential:", user);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  }
 
   const onSignUp = (event) => {
     event.preventDefault()
@@ -18,7 +40,7 @@ const SignUp = () => {
     user.set("username", username);
     user.set("password", password);
     user.set("email", email);
-    
+
     user.signUp()
       .then(() => {
         setErrorMsg('')
@@ -53,8 +75,8 @@ const SignUp = () => {
             We'll never share your email with anyone else.
           </Form.Text>
         </Form.Group>
-        
-        
+
+
         <Form.Group controlId="formBasicPassword">
           <Form.Label htmlFor="inputPassword5">Password</Form.Label>
           <Form.Control type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.currentTarget.value)} aria-describedby="passwordHelpBlock" />
@@ -64,7 +86,7 @@ const SignUp = () => {
           </Form.Text>
         </Form.Group>
 
-        <Button type="submit">Sign Up</Button>
+        <Button type="submit" onClick={onnSubmit}>Sign Up</Button>
       </Form>
 
       <small class="text-muted">
