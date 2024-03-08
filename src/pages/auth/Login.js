@@ -62,7 +62,7 @@ const Login = () => {
 
       <Form onSubmit={onnLogin}>
         <Form.Group controlId="formBasicUsername">
-          <Form.Label>Username</Form.Label>
+          <Form.Label>Email</Form.Label>
           <Form.Control type="email" placeholder="Enter email" value={email} onChange={(event) => setEmail(event.currentTarget.value)} />
         </Form.Group>
 
@@ -75,7 +75,7 @@ const Login = () => {
       </Form>
 
       <small className="text-muted">
-        Don&apos;t yet have an account?
+        Don't yet have an account?
         <a href="/auth/signup"> Sign Up</a>
       </small>
     </div>

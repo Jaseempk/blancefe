@@ -10,6 +10,7 @@ const GIG_CATEGORIES = {
     'Logo Design',
     'Brand Style Guides',
     'Business Cards & Stationery',
+    'NFT Designer',
   ],
   'Digital Marketing': [
     'Marketing Strategy',
@@ -22,7 +23,9 @@ const GIG_CATEGORIES = {
     'Articles & Blog Posts',
     'Translation',
     'Proofreading & Editing',
+    'Crypto Content Writer',
     'Resume Writing',
+    'Web3 Content Creation',
   ],
   'Video & Animation': [
     'Whiteboard & Animated Explainers',
@@ -36,6 +39,12 @@ const GIG_CATEGORIES = {
     'Game Development',
     'Development for StreamersNEW',
     'Web Programming',
+    'Blockchain Development',
+    'Smart Contract Development',
+    'Web3 Application Development',
+    'Solidity Developer',
+    'Rust Developer',
+    'Blockchain UX/UI Designer',
   ],
 }
 
