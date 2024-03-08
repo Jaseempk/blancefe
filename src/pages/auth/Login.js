@@ -1,21 +1,45 @@
 import { useState } from "react"
 import { Alert, Button, CloseButton, Form } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import moralis from 'moralis'
 
 // const Moralis = require('moralis')
 
 const Login = () => {
   const history = useHistory()
-  
-  const [username, setUsername] = useState('')
+
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
+
+
+  const auth = getAuth();
+  const onnLogin = (event) => {
+    event.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        console.log("logged in");
+        const user = userCredential.user;
+        console.log("user:", user)
+        history.push('/explore')
+
+        setErrorMsg('')
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setErrorMsg(error.toString())
+
+      });
+  }
 
   const onLogin = (event) => {
     event.preventDefault()
 
-    moralis.User.logIn(username, password)
+    moralis.User.logIn(email, password)
       .then(() => {
         setErrorMsg('')
         history.push('/explore')
@@ -36,10 +60,10 @@ const Login = () => {
         </Alert>
       )}
 
-      <Form onSubmit={onLogin}>
+      <Form onSubmit={onnLogin}>
         <Form.Group controlId="formBasicUsername">
           <Form.Label>Username</Form.Label>
-          <Form.Control type="username" placeholder="Username" value={username} onChange={(event) => setUsername(event.currentTarget.value)} />
+          <Form.Control type="email" placeholder="Enter email" value={email} onChange={(event) => setEmail(event.currentTarget.value)} />
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
@@ -51,7 +75,7 @@ const Login = () => {
       </Form>
 
       <small className="text-muted">
-        Don&apos;t yet have an account? 
+        Don&apos;t yet have an account?
         <a href="/auth/signup"> Sign Up</a>
       </small>
     </div>

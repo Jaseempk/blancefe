@@ -13,16 +13,16 @@ import Admin from './pages/admin/Admin';
 
 const App = () => {
   // Load erdjs script for Elrond login
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src =
-      "https://npmcdn.com/@elrondnetwork/erdjs@4.0.3/out-browser/erdjs.js";
-    script.async = true;
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const script = document.createElement("script");
+  //   script.src =
+  //     "https://npmcdn.com/@elrondnetwork/erdjs@4.0.3/out-browser/erdjs.js";
+  //   script.async = true;
+  //   document.body.appendChild(script);
+  //   return () => {
+  //     document.body.removeChild(script);
+  //   };
+  // }, []);
 
   return (
     <Router>

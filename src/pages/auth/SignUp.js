@@ -17,13 +17,14 @@ const SignUp = () => {
   const provider = new GoogleAuthProvider();
 
 
-  const onnSubmit = () => {
-
+  const onnSubmit = (event) => {
+    event.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed up 
         const user = userCredential.user;
         console.log("userCredential:", user);
+        history.push('/marketplace');
         // ...
       })
       .catch((error) => {
@@ -62,7 +63,7 @@ const SignUp = () => {
         </Alert>
       )}
 
-      <Form onSubmit={onSignUp}>
+      <Form onSubmit={onnSubmit}>
         <Form.Group controlId="formBasicUsername">
           <Form.Label>Username</Form.Label>
           <Form.Control type="username" placeholder="Username" value={username} onChange={(event) => setUsername(event.currentTarget.value)} />
@@ -86,7 +87,7 @@ const SignUp = () => {
           </Form.Text>
         </Form.Group>
 
-        <Button type="submit" onClick={onnSubmit}>Sign Up</Button>
+        <Button type="submit" >Sign Up</Button>
       </Form>
 
       <small class="text-muted">
